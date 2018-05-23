@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="at.medbits.launchtopom.surefire"
+            name="launch to surefire pom">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <command
+               commandId="at.medbits.launchtopom.surefire"
+               label="To Tycho Surefire pom"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                  </iterate>
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+               <adapt
+                     type="org.eclipse.core.resources.IResource">
+                  <test
+                        property="org.eclipse.core.resources.projectNature"
+                        value="org.eclipse.pde.PluginNature">
+                  </test>
+               </adapt>
+                                 <test
+                        property="org.eclipse.core.resources.name"
+                        value="*.launch">
+                  </test>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="at.medbits.tools.launchtopom.handler.LaunchToSurefirePomHandler"
+            commandId="at.medbits.launchtopom.surefire">
+      </handler>
+   </extension>
+
+</plugin>
