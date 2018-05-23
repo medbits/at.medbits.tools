@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/at.medbits.tools.launchtopom.feature_1.0.0.qualifier.jar" id="at.medbits.tools.launchtopom.feature" version="1.0.0.qualifier">
+      <category name="at.medbits.tools.update"/>
+   </feature>
+   <category-def name="at.medbits.tools.update" label="medbits tools"/>
+</site>

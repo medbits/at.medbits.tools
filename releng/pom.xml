@@ -1,0 +1,18 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>at.medbits.tools.tycho</groupId>
+    <artifactId>at.medbits.tools.tycho.releng</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>at.medbits.tools.tycho</groupId>
+        <artifactId>at.medbits.tools.tycho.root</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>at.medbits.tools.target</module>
+		<module>at.medbits.tools.update</module>
+    </modules>
+</project>

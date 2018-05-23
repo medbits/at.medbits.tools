@@ -1,0 +1,14 @@
+target "at.medbits.tools.target" with source allEnvironments
+
+location "http://download.eclipse.org/eclipse/updates/4.7" {
+	org.eclipse.pde.feature.group
+	org.eclipse.jdt.feature.group
+	org.eclipse.sdk.feature.group
+	org.eclipse.e4.rcp.feature.group
+}
+
+location "http://download.eclipse.org/releases/oxygen/" {
+	org.eclipse.m2e.maven.runtime
+	org.eclipse.m2e.maven.runtime.slf4j.simple
+	org.eclipse.emf.feature.group
+}
