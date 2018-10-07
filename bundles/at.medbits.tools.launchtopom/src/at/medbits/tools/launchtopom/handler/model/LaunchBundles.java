@@ -25,6 +25,18 @@ public class LaunchBundles {
 		return ret;
 	}
 
+	public static LaunchBundles fragments(LaunchBundles bundles) {
+		LaunchBundles ret = new LaunchBundles();
+		ret.type = bundles.type;
+
+		for (LaunchBundle bundle : bundles.getLaunchBundles()) {
+			if (bundle.isFragment()) {
+				ret.bundles.add(bundle);
+			}
+		}
+		return ret;
+	}
+
 	public List<LaunchBundle> getLaunchBundles() {
 		return bundles;
 	}

@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
-<!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="at.medbits.tools.target" sequenceNumber="1527079541">
+<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+<target name="at.medbits.tools.target" sequenceNumber="1538992536">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.pde.feature.group" version="3.13.4.v20180330-0640"/>
-      <unit id="org.eclipse.jdt.feature.group" version="3.13.4.v20180330-0919"/>
-      <unit id="org.eclipse.sdk.feature.group" version="4.7.3.v20180330-0919"/>
-      <unit id="org.eclipse.e4.rcp.feature.group" version="1.6.3.v20180329-0507"/>
-      <repository location="http://download.eclipse.org/eclipse/updates/4.7"/>
-    </location>
-    <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.m2e.maven.runtime" version="1.8.3.20180227-2135"/>
-      <unit id="org.eclipse.m2e.maven.runtime.slf4j.simple" version="1.8.3.20180227-2135"/>
-      <unit id="org.eclipse.emf.feature.group" version="2.13.0.v20170609-0928"/>
-      <repository location="http://download.eclipse.org/releases/oxygen/"/>
+      <unit id="org.eclipse.pde.feature.group" version="3.13.200.v20180906-0745"/>
+      <unit id="org.eclipse.jdt.feature.group" version="3.15.0.v20180906-0745"/>
+      <unit id="org.eclipse.sdk.feature.group" version="4.9.0.v20180906-1121"/>
+      <unit id="org.eclipse.e4.rcp.feature.group" version="1.6.200.v20180906-1121"/>
+      <unit id="org.eclipse.m2e.maven.runtime" version="1.9.1.20180912-1600"/>
+      <unit id="org.eclipse.m2e.maven.runtime.slf4j.simple" version="1.9.1.20180912-1600"/>
+      <unit id="org.eclipse.emf.feature.group" version="2.15.0.v20180905-1732"/>
+      <repository location="http://download.eclipse.org/releases/2018-09/"/>
     </location>
   </locations>
 </target>

@@ -5,6 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +39,7 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import at.medbits.tools.launchtopom.handler.model.FragmentRequirementsXml;
 import at.medbits.tools.launchtopom.handler.model.LaunchBundles;
 import at.medbits.tools.launchtopom.handler.model.LaunchBundles.Type;
 import at.medbits.tools.launchtopom.handler.model.TychoSurefireXml;
@@ -64,8 +68,8 @@ public class LaunchToSurefirePomHandler extends AbstractHandler implements IHand
 		try {
 			file.getProject().refreshLocal(IResource.DEPTH_ONE, new NullProgressMonitor());
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error",
+					"Error refreshing pom." + getStackTrace(e));
 		}
 	}
 
@@ -117,6 +121,7 @@ public class LaunchToSurefirePomHandler extends AbstractHandler implements IHand
 			Build build = new Build();
 			build.setSourceDirectory("src");
 			List<Plugin> plugins = new ArrayList<Plugin>();
+			plugins.add(getFragmentRequirementsPlugin(workspaceBundles, targetBundles));
 			plugins.add(getTychoSureFirePlugin(attributes, workspaceBundles, targetBundles));
 			build.setPlugins(plugins);
 			model.setBuild(build);
@@ -134,8 +139,8 @@ public class LaunchToSurefirePomHandler extends AbstractHandler implements IHand
 			}
 			return true;
 		} catch (CoreException | IOException | XmlPullParserException e) {
-			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error", "Error writing pom.");
-			e.printStackTrace();
+			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error",
+					"Error writing pom." + getStackTrace(e));
 		}
 		return false;
 	}
@@ -161,11 +166,38 @@ public class LaunchToSurefirePomHandler extends AbstractHandler implements IHand
 			TychoSurefireXml xml = TychoSurefireXml.of(attributes, workspaceBundles, targetBundles);
 			Xpp3Dom dom = Xpp3DomBuilder.build(xml.getInputStream(), "UTF-8");
 			plugin.setConfiguration(dom);
-		} catch (XmlPullParserException | IOException e) {
+		} catch (Exception e) {
 			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error",
-					"Error getting Tycho Surefire plugin.");
-			e.printStackTrace();
+					"Error getting Tycho Surefire plugin." + getStackTrace(e));
 		}
 		return plugin;
+	}
+	
+	private Plugin getFragmentRequirementsPlugin(LaunchBundles workspaceBundles, LaunchBundles targetBundles) {
+		Plugin plugin = new Plugin();
+		plugin.setGroupId("org.eclipse.tycho");
+		plugin.setArtifactId("target-platform-configuration");
+		
+		workspaceBundles = LaunchBundles.fragments(workspaceBundles);
+		targetBundles = LaunchBundles.fragments(targetBundles);
+		try {
+			FragmentRequirementsXml xml = FragmentRequirementsXml.of(workspaceBundles, targetBundles);
+			Xpp3Dom dom = Xpp3DomBuilder.build(xml.getInputStream(), "UTF-8");
+			plugin.setConfiguration(dom);
+		} catch (Exception e) {
+			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error",
+					"Error getting Fragment Requirements plugin." + getStackTrace(e));
+		}
+		return plugin;
+	}
+
+	private String getStackTrace(Exception e) {
+		ByteArrayOutputStream output = new ByteArrayOutputStream();
+		try (PrintStream ps = new PrintStream(output, true, "UTF-8")) {
+			e.printStackTrace(ps);
+		} catch (UnsupportedEncodingException e1) {
+			// ignore
+		}
+		return "\n\n" + new String(output.toByteArray(), StandardCharsets.UTF_8);
 	}
 }

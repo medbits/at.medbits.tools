@@ -25,8 +25,12 @@ public class TychoSurefireXml {
 			}
 		} else if (productString != null && !productString.isEmpty()) {
 			sb.append("<useUIHarness>true</useUIHarness>");
-			String runInUi = (String) attributes.get("run_in_ui_thread");
-			if (runInUi == null || runInUi.isEmpty()) {
+			Object runInUi = attributes.get("run_in_ui_thread");
+			if (runInUi instanceof String) {
+				runInUi = "true";
+			} else if (runInUi instanceof Boolean) {
+				runInUi = Boolean.toString((Boolean) runInUi);
+			} else {
 				runInUi = "false";
 			}
 			sb.append("<useUIThread>" + runInUi + "</useUIThread>");
