@@ -19,10 +19,9 @@ public class TychoSurefireXml {
 		if (applicationString != null
 				&& applicationString.equals("org.eclipse.pde.junit.runtime.coretestapplication")) {
 			sb.append("<useUIHarness>false</useUIHarness>");
-			String main = (String) attributes.get("org.eclipse.jdt.launching.MAIN_TYPE");
-			if (main != null) {
-				sb.append("<testClass>").append(main).append("</testClass>");
-			}
+		} else if (applicationString != null
+				&& !applicationString.equals("org.eclipse.pde.junit.runtime.coretestapplication")) {
+			sb.append("<application>" + applicationString + "</application>");
 		} else if (productString != null && !productString.isEmpty()) {
 			sb.append("<useUIHarness>true</useUIHarness>");
 			Object runInUi = attributes.get("run_in_ui_thread");
@@ -36,6 +35,10 @@ public class TychoSurefireXml {
 			sb.append("<useUIThread>" + runInUi + "</useUIThread>");
 			sb.append("<product>").append(productString).append("</product>");
 			sb.append("<application>org.eclipse.e4.ui.workbench.swt.E4Application</application>");
+		}
+		String main = (String) attributes.get("org.eclipse.jdt.launching.MAIN_TYPE");
+		if (main != null) {
+			sb.append("<testClass>").append(main).append("</testClass>");
 		}
 		sb.append("<showEclipseLog>true</showEclipseLog>");
 		String vmArgs = (String) attributes.get("org.eclipse.jdt.launching.VM_ARGUMENTS");
