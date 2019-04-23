@@ -21,7 +21,17 @@ public class TychoSurefireXml {
 			sb.append("<useUIHarness>false</useUIHarness>");
 		} else if (applicationString != null
 				&& !applicationString.equals("org.eclipse.pde.junit.runtime.coretestapplication")) {
+			sb.append("<useUIHarness>true</useUIHarness>");
 			sb.append("<application>" + applicationString + "</application>");
+			Object runInUi = attributes.get("run_in_ui_thread");
+			if (runInUi instanceof String) {
+				runInUi = "true";
+			} else if (runInUi instanceof Boolean) {
+				runInUi = Boolean.toString((Boolean) runInUi);
+			} else {
+				runInUi = "false";
+			}
+			sb.append("<useUIThread>" + runInUi + "</useUIThread>");
 		} else if (productString != null && !productString.isEmpty()) {
 			sb.append("<useUIHarness>true</useUIHarness>");
 			Object runInUi = attributes.get("run_in_ui_thread");
