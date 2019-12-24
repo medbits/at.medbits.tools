@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -82,16 +83,17 @@ public class LaunchToSurefirePomHandler extends AbstractHandler implements IHand
 	 * @param file
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	private boolean writePomFromLaunch(IFile file) {
 		try {
 			ILaunchManager manager = DebugPlugin.getDefault().getLaunchManager();
 			ILaunchConfiguration launch = manager.getLaunchConfiguration(file);
 
 			Map<String, Object> attributes = launch.getAttributes();
-			LaunchBundles targetBundles = LaunchBundles.of((String) attributes.get("selected_target_plugins"),
-					Type.TARGET);
-			LaunchBundles workspaceBundles = LaunchBundles.of((String) attributes.get("selected_workspace_plugins"),
-					Type.WORKSPACE);
+			LaunchBundles targetBundles = LaunchBundles
+					.of((Collection<String>) attributes.get("selected_target_bundles"), Type.TARGET);
+			LaunchBundles workspaceBundles = LaunchBundles
+					.of((Collection<String>) attributes.get("selected_workspace_bundles"), Type.WORKSPACE);
 
 			String artifactId = file.getProject().getName();
 			org.apache.maven.model.Model model = new Model();
@@ -172,12 +174,12 @@ public class LaunchToSurefirePomHandler extends AbstractHandler implements IHand
 		}
 		return plugin;
 	}
-	
+
 	private Plugin getFragmentRequirementsPlugin(LaunchBundles workspaceBundles, LaunchBundles targetBundles) {
 		Plugin plugin = new Plugin();
 		plugin.setGroupId("org.eclipse.tycho");
 		plugin.setArtifactId("target-platform-configuration");
-		
+
 		workspaceBundles = LaunchBundles.fragments(workspaceBundles);
 		targetBundles = LaunchBundles.fragments(targetBundles);
 		try {

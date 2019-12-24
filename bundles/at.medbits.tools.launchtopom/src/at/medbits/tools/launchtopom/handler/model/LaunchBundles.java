@@ -1,6 +1,7 @@
 package at.medbits.tools.launchtopom.handler.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class LaunchBundles {
@@ -11,13 +12,11 @@ public class LaunchBundles {
 	private Type type;
 	private List<LaunchBundle> bundles = new ArrayList<>();
 
-	public static LaunchBundles of(String launchConfigLine, Type type) {
+	public static LaunchBundles of(Collection<String> launchBundles, Type type) {
 		LaunchBundles ret = new LaunchBundles();
 		ret.type = type;
-
-		String[] parts = launchConfigLine.split(",");
-		if (parts != null && parts.length > 0) {
-			for (String part : parts) {
+		if (launchBundles != null) {
+			for (String part : launchBundles) {
 				LaunchBundle launchBundle = LaunchBundle.of(part);
 				ret.bundles.add(launchBundle);
 			}
