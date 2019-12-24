@@ -2,7 +2,7 @@
 <feature
       id="at.medbits.tools.launchtopom.feature"
       label="launch to pom feature"
-      version="1.0.0.qualifier">
+      version="1.1.0.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
