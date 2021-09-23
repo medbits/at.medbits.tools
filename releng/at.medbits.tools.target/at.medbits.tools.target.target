@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="at.medbits.tools.target" sequenceNumber="1577179011">
+<target name="at.medbits.tools.target" sequenceNumber="1626081119">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.pde.feature.group" version="3.14.200.v20191210-0610"/>
-      <unit id="org.eclipse.jdt.feature.group" version="3.18.200.v20191210-0610"/>
-      <unit id="org.eclipse.sdk.feature.group" version="4.14.0.v20191210-0610"/>
-      <unit id="org.eclipse.e4.rcp.feature.group" version="4.14.0.v20191204-0601"/>
-      <unit id="org.eclipse.m2e.maven.runtime" version="1.14.0.20191209-1923"/>
-      <unit id="org.eclipse.m2e.maven.runtime.slf4j.simple" version="1.14.0.20191209-1923"/>
-      <unit id="org.eclipse.emf.feature.group" version="2.20.0.v20191028-0905"/>
-      <repository location="http://download.eclipse.org/releases/2019-12/"/>
+      <unit id="org.eclipse.pde.feature.group" version="3.14.700.v20210303-1800"/>
+      <unit id="org.eclipse.jdt.feature.group" version="3.18.700.v20210303-1800"/>
+      <unit id="org.eclipse.sdk.feature.group" version="4.19.0.v20210303-1800"/>
+      <unit id="org.eclipse.e4.rcp.feature.group" version="4.19.0.v20210302-1107"/>
+      <unit id="org.eclipse.m2e.maven.runtime" version="1.16.0.20210129-0849"/>
+      <unit id="org.eclipse.m2e.maven.runtime.slf4j.simple" version="1.16.0.20200610-1735"/>
+      <unit id="org.eclipse.emf.feature.group" version="2.25.0.v20210114-1734"/>
+      <repository location="http://download.eclipse.org/releases/2021-03/"/>
     </location>
   </locations>
 </target>
